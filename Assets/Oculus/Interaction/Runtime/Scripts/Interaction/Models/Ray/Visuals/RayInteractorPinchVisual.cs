@@ -137,7 +137,7 @@ namespace Oculus.Interaction
 
             _skinnedMeshRenderer.material.color = isPinching ? Color.white : new Color(1f, 1f, 1f, Mathf.Lerp(_alphaRange.x, _alphaRange.y, mappedPinchStrength));
             _skinnedMeshRenderer.SetBlendShapeWeight(0, mappedPinchStrength * 100f);
-            _skinnedMeshRenderer.SetBlendShapeWeight(2, mappedPinchStrength * 100f);
+            _skinnedMeshRenderer.SetBlendShapeWeight(1, mappedPinchStrength * 100f);
         }
 
         private void UpdateVisualState(InteractorStateChangeArgs args) => UpdateVisual();
