@@ -15,6 +15,7 @@ public class AlertManager : MonoBehaviour
         GameManager.instance.canAlert = true;
         breakGlass.SetActive(false);
         pressAlert.SetActive(true);
+        Destroy(this.gameObject);
 
         //to-do Add Glass break animation
     }
@@ -25,6 +26,8 @@ public class AlertManager : MonoBehaviour
         {
             GameManager.instance.alertPressed = true;
             pressAlert.SetActive(false);
+
+            this.gameObject.GetComponent<AudioSource>().Play();
             //to-do set alarm music
         }
     }
@@ -47,7 +50,12 @@ public class AlertManager : MonoBehaviour
         fireType.SetActive(true);
     }
 
-    public void OnFireTypeSelect()
+    public void PlaceSelectionError()
+    {
+        fireLocation.SetActive(false);
+        fireType.SetActive(true);
+    }
+    public void OnElectricTypeSelect()
     {
         fireType.SetActive(false);
     }
