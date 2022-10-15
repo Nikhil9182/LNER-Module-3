@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class AlertManager : MonoBehaviour
 {
     public GameObject breakGlass;
     public GameObject pressAlert;
     public GameObject phone;
+    public GameObject Keypad;
+    public GameObject dialError;
     public GameObject fireLocation;
     public GameObject fireType;
 
@@ -40,15 +43,33 @@ public class AlertManager : MonoBehaviour
 
     public void OnPhoneHover()
     {
+        dialError.SetActive(false);
         phone.SetActive(true);
     }
 
     public void OnPhoneSelect()
     {
         phone.SetActive(false);
-        fireLocation.SetActive(true);
     }
 
+    public void OnNumberSelect(TextMeshProUGUI textGO)
+    {
+        GameManager.instance.dialedNumber += textGO.text;
+    }
+
+    public void OnCallDialed()
+    {
+        if(GameManager.instance.dialedNumber == "911")
+        {
+            Keypad.SetActive(false);
+            dialError.SetActive(false);
+            fireLocation.SetActive(true);
+        }
+        else
+        {
+            dialError.SetActive(true);
+        }
+    }
     public void OnLnerAcademySelect()
     {
         Debug.Log("presses");

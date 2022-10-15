@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public bool canAlert;
     public bool alertPressed;
 
+    [HideInInspector]
+    public string dialedNumber;
+
     public bool pinRemoved;
 
     public GameObject particles;
