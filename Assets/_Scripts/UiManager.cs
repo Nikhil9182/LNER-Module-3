@@ -19,8 +19,15 @@ public class UiManager : MonoBehaviour
 
     public GameObject fireScene;
 
+    public GameObject pickTheExt;
+    public GameObject grabPin;
+
     private AudioSource canvasPopSound;
 
+    private bool pickExtActive;
+
+    private bool timeStarted;
+    
     void Start()
     {
         cameraFollow._canvasTransform = welcomeWindow.transform;
@@ -28,6 +35,26 @@ public class UiManager : MonoBehaviour
         StartCoroutine(setWelcomeWindow());
     }
 
+    private void Update()
+    {
+        if(timeStarted)
+        {
+            GameManager.instance.totalTime += Time.deltaTime;
+        }
+        if(!pickExtActive && pickTheExt.active)
+        {
+            pickExtActive = true;
+            StartCoroutine(pickUpExtActive());
+        }
+    }
+
+    IEnumerator pickUpExtActive()
+    {
+        yield return new WaitForSeconds(5f);
+        pickTheExt.SetActive(false);
+        grabPin.SetActive(true);
+
+    }
     IEnumerator setWelcomeWindow()
     {
         welcomeWindow.SetActive(true);
@@ -72,14 +99,16 @@ public class UiManager : MonoBehaviour
     {
         StartLevel.SetActive(false);
         fireScene.SetActive(true);
+        timeStarted = true;
     }
 
     public void OnElectricFireSelect()
     {
-        cameraFollow._canvasTransform = calledForSafety.transform;
         calledForSafety.SetActive(true);
+
+        GameManager.instance.phoneTime = GameManager.instance.totalTime;
+
         StartCoroutine(hideUI(calledForSafety));
-        selectCloth.SetActive(true);
     }
     public void OnClothSelect()
     {
@@ -88,6 +117,9 @@ public class UiManager : MonoBehaviour
         selectCloth.SetActive(false);
         GetBackToFire.SetActive(true);
         Precautions.SetActive(true);
+
+        GameManager.instance.maskTime = GameManager.instance.totalTime;
+
         StartCoroutine(hideUI(GetBackToFire));
     }
 

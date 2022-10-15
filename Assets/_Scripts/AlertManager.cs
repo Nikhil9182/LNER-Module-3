@@ -10,11 +10,15 @@ public class AlertManager : MonoBehaviour
     public GameObject fireLocation;
     public GameObject fireType;
 
+    public GameObject selectExtUI;
     public void OnGlassSelect()
     {
         GameManager.instance.canAlert = true;
         breakGlass.SetActive(false);
         pressAlert.SetActive(true);
+
+        this.gameObject.GetComponent<AudioSource>().Play();
+
         Destroy(this.gameObject);
 
         //to-do Add Glass break animation
@@ -26,6 +30,8 @@ public class AlertManager : MonoBehaviour
         {
             GameManager.instance.alertPressed = true;
             pressAlert.SetActive(false);
+
+            GameManager.instance.alarmTime = GameManager.instance.totalTime;
 
             this.gameObject.GetComponent<AudioSource>().Play();
             //to-do set alarm music
@@ -60,5 +66,10 @@ public class AlertManager : MonoBehaviour
         fireType.SetActive(false);
     }
 
+    public void OnFightSelect()
+    {
+        selectExtUI.SetActive(true);
+        GameManager.instance.totalTime = 0;
+    }
 
 }
