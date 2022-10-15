@@ -14,6 +14,18 @@ public class AlertManager : MonoBehaviour
     public GameObject fireType;
 
     public GameObject selectExtUI;
+
+    private Material alarmMat;
+    public void OnAlarmHover(GameObject alarm)
+    {
+        alarmMat = alarm.GetComponent<MeshRenderer>().material;
+        alarm.GetComponent<MeshRenderer>().material.color = Color.green;
+    }
+
+    public void OnAlarmUnhover(GameObject alarm)
+    {
+        alarm.GetComponent<MeshRenderer>().material.color = alarmMat.color;
+    }
     public void OnGlassSelect()
     {
         GameManager.instance.canAlert = true;

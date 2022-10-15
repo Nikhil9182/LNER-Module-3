@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public bool alertPressed;
 
     [HideInInspector]
+    public bool clothOn;
+
+    [HideInInspector]
     public string dialedNumber;
 
     public bool pinRemoved;

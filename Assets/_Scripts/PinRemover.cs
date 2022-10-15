@@ -31,12 +31,5 @@ public class PinRemover : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         sprayExt.SetActive(false);
-        baseFire.SetActive(true);
-        StartCoroutine(setBaseFireUnactive());
-    }
-    IEnumerator setBaseFireUnactive()
-    {
-        yield return new WaitForSeconds(5f);
-        baseFire.SetActive(false);
     }
 }

@@ -112,17 +112,21 @@ public class UiManager : MonoBehaviour
     }
     public void OnClothSelect()
     {
-        cameraFollow._canvasTransform = GetBackToFire.transform;
-
         selectCloth.SetActive(false);
         GetBackToFire.SetActive(true);
-        Precautions.SetActive(true);
+
+        GameManager.instance.clothOn = true;
 
         GameManager.instance.maskTime = GameManager.instance.totalTime;
 
         StartCoroutine(hideUI(GetBackToFire));
     }
 
+    public void OnFireLocation()
+    {
+        if(GameManager.instance.clothOn == true)
+            Precautions.SetActive(true);
+    }
     IEnumerator hideUI(GameObject UI)
     {
         yield return new WaitForSeconds(5f);
