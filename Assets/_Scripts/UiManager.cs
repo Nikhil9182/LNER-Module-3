@@ -30,7 +30,7 @@ public class UiManager : MonoBehaviour
     
     void Start()
     {
-        cameraFollow._canvasTransform = welcomeWindow.transform;
+        cameraFollow._unmovableCanvasTransform = welcomeWindow.transform;
         canvasPopSound = GetComponent<AudioSource>();
         StartCoroutine(setWelcomeWindow());
     }
@@ -61,7 +61,7 @@ public class UiManager : MonoBehaviour
         canvasPopSound.Play();
         yield return new WaitForSeconds(10f);
         welcomeWindow.SetActive(false);
-        cameraFollow._canvasTransform = pinchTutorial.transform;
+        cameraFollow._unmovableCanvasTransform = pinchTutorial.transform;
         pinchTutorial.SetActive(true);
         canvasPopSound.Play();
     }
@@ -71,7 +71,7 @@ public class UiManager : MonoBehaviour
     {
         Debug.Log("Pinch pressed");
         pinchTutorial.SetActive(false);
-        cameraFollow._canvasTransform = directTutorial.transform;
+        cameraFollow._unmovableCanvasTransform = directTutorial.transform;
 
         directTutorial.SetActive(true);
         canvasPopSound.Play();
@@ -80,7 +80,7 @@ public class UiManager : MonoBehaviour
     public void OnDirectSelect()
     {
         directTutorial.SetActive(false);
-        cameraFollow._canvasTransform = teleportTutorial.transform;
+        cameraFollow._unmovableCanvasTransform = teleportTutorial.transform;
 
         teleportTutorial.SetActive(true);
         canvasPopSound.Play();
@@ -89,7 +89,7 @@ public class UiManager : MonoBehaviour
     public void OnTeleportSelect()
     {
         teleportTutorial.SetActive(false);
-        cameraFollow._canvasTransform = StartLevel.transform;
+        cameraFollow._unmovableCanvasTransform = StartLevel.transform;
 
         StartLevel.SetActive(true);
         canvasPopSound.Play();

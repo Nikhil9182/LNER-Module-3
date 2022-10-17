@@ -5,10 +5,12 @@ using TMPro;
 
 public class AlertManager : MonoBehaviour
 {
+
     public GameObject breakGlass;
     public GameObject pressAlert;
     public GameObject phone;
     public GameObject Keypad;
+    public GameObject keypadScreen;
     public GameObject dialError;
     public GameObject fireLocation;
     public GameObject fireType;
@@ -16,6 +18,8 @@ public class AlertManager : MonoBehaviour
     public GameObject selectExtUI;
 
     private Material alarmMat;
+
+    private int len = 0;
     public void OnAlarmHover(GameObject alarm)
     {
         alarmMat = alarm.GetComponent<MeshRenderer>().material;
@@ -29,12 +33,11 @@ public class AlertManager : MonoBehaviour
     public void OnGlassSelect()
     {
         GameManager.instance.canAlert = true;
+        this.GetComponent<AudioSource>().Play();
         breakGlass.SetActive(false);
         pressAlert.SetActive(true);
 
-        this.gameObject.GetComponent<AudioSource>().Play();
-
-        Destroy(this.gameObject);
+        Destroy(this.gameObject.transform.GetChild(0).gameObject);
 
         //to-do Add Glass break animation
     }
@@ -43,13 +46,12 @@ public class AlertManager : MonoBehaviour
     {
         if (GameManager.instance.canAlert == true)
         {
+            this.GetComponent<AudioSource>().Play();
+
             GameManager.instance.alertPressed = true;
             pressAlert.SetActive(false);
 
             GameManager.instance.alarmTime = GameManager.instance.totalTime;
-
-            this.gameObject.GetComponent<AudioSource>().Play();
-            //to-do set alarm music
         }
     }
 
@@ -64,24 +66,51 @@ public class AlertManager : MonoBehaviour
         phone.SetActive(false);
     }
 
-    public void OnNumberSelect(TextMeshProUGUI textGO)
+    public void OnNumberSelect(string textGO)
     {
-        GameManager.instance.dialedNumber += textGO.text;
+        len++;
+        GameManager.instance.dialedNumber += textGO;
+        keypadScreen.GetComponent<TextMeshProUGUI>().text = GameManager.instance.dialedNumber;
     }
 
     public void OnCallDialed()
     {
         if(GameManager.instance.dialedNumber == "911")
         {
-            Keypad.SetActive(false);
-            dialError.SetActive(false);
-            fireLocation.SetActive(true);
+            StartCoroutine(emergencyCalled());
         }
         else
         {
             dialError.SetActive(true);
+            GameManager.instance.dialedNumber = "";
         }
     }
+
+    public void OnClearSelect()
+    {
+        GameManager.instance.dialedNumber = "";
+        keypadScreen.GetComponent<TextMeshProUGUI>().text = GameManager.instance.dialedNumber;
+    }
+
+    public void OnPrevSelect()
+    {
+        if(len !=0 )
+            --len;
+        keypadScreen.GetComponent<TextMeshProUGUI>().text = GameManager.instance.dialedNumber.Substring(0, len);
+    }
+    IEnumerator emergencyCalled()
+    {
+        this.GetComponent<AudioSource>().clip = GameManager.instance.callRing;
+        this.GetComponent<AudioSource>().loop = true;
+        this.GetComponent<AudioSource>().Play();
+
+        yield return new WaitForSeconds(4);
+        Keypad.SetActive(false);
+        dialError.SetActive(false);
+        fireLocation.SetActive(true);
+        this.GetComponent<AudioSource>().Stop();
+    }
+
     public void OnLnerAcademySelect()
     {
         Debug.Log("presses");

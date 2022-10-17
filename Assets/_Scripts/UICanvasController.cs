@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UICanvasController : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class UICanvasController : MonoBehaviour
     [SerializeField]
     private OVRCameraRig _cameraRig;
     [SerializeField]
-    public Transform _canvasTransform;
+    public Transform _unmovableCanvasTransform;
     [SerializeField]
-    private float _offset = 5f;
+    private float _movableCanvasOffset = 5f;
+    [SerializeField]
+    private float _minDistance = 1f;
     [SerializeField]
     private float smoothTime = 1f;
 
@@ -20,26 +23,32 @@ public class UICanvasController : MonoBehaviour
     private void Start()
     {
         Vector3 pos = _targetTransform.position;
-        pos.z += _offset;
+        pos.z += _movableCanvasOffset;
         _targetTransform.position = pos;
     }
 
     private void FixedUpdate()
     {
-        CanvasFollow();
+        UnmovableCanvasFollow();
     }
 
-    private void CanvasFollow()
+    private void UnmovableCanvasFollow()
     {
-
+        //Unmovable Canvas
         //Rotation
-        Vector3 lookPos = _canvasTransform.position - _cameraRig.transform.position;
+        Vector3 lookPos = _unmovableCanvasTransform.position - _cameraRig.transform.position;
+        lookPos.y = 0;
         var rotation = Quaternion.LookRotation(lookPos);
-        _canvasTransform.rotation = Quaternion.Slerp(transform.rotation, rotation, smoothTime);
+        _unmovableCanvasTransform.rotation = Quaternion.Slerp(_unmovableCanvasTransform.rotation, rotation, smoothTime);
 
         //Position
-        Vector3 cameraPos = _targetTransform.position;
-        cameraPos.y = _canvasTransform.transform.position.y;
-        _canvasTransform.position = Vector3.SmoothDamp(_canvasTransform.position, cameraPos, ref velocity, smoothTime);
+        float distance = Vector3.Distance(_targetTransform.position, _unmovableCanvasTransform.position);
+        if (distance > _minDistance)
+        {
+            float time = smoothTime / distance;
+            Vector3 cameraPos = _targetTransform.position;
+            cameraPos.y = _unmovableCanvasTransform.transform.position.y;
+            _unmovableCanvasTransform.position = Vector3.SmoothDamp(_unmovableCanvasTransform.position, cameraPos, ref velocity, time);
+        }
     }
 }

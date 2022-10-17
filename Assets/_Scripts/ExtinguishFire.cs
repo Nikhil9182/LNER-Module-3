@@ -15,29 +15,18 @@ public class ExtinguishFire : MonoBehaviour
 
     public void Update()
     {
-        if (canExt && GameManager.instance.pinRemoved && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0.8f && GameManager.instance.extinguisherSize > 0)
+        if (canExt && GameManager.instance.pinRemoved && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0.8f)
         {
-            GameManager.instance.extinguisherSize -= Time.deltaTime;
             if(GameManager.instance.particles.CompareTag("CO2"))
-                ReduceFire(0.0028f);
+            {
+                ReduceFire(0.0046f);
+                GameManager.instance.extinguisherSize -= Time.deltaTime;
+            }
             else if (GameManager.instance.particles.CompareTag("Dry"))
-                ReduceFire(0.002f);
-        }
-        else if (GameManager.instance.extinguisherSize <= 0 || Fire.transform.GetChild(0).localScale.x <= 0)
-        {
-            Fire.GetComponent<AudioSource>().Stop();
-
-            GameManager.instance.fireTime = GameManager.instance.totalTime;
-         
-            DisplayReport();
-            ReportUI.SetActive(true);
-
-            this.gameObject.SetActive(false);
-        }
-        else
-        {
-            DisplayReport();
-            ReportUI.SetActive(false);
+            {
+                ReduceFire(0.0025f);
+                GameManager.instance.extinguisherSize -= Time.deltaTime;
+            }
         }
     }
 
@@ -51,13 +40,16 @@ public class ExtinguishFire : MonoBehaviour
             }
             else
             {
-
                 //add report UI change
 /*                successfulExt.SetActive(true);
 */
                 Fire.GetComponent<AudioSource>().Stop();
 
                 GameManager.instance.fireTime = GameManager.instance.totalTime;
+
+                DisplayReport();
+                ReportUI.SetActive(true);
+                this.gameObject.GetComponent<ExtinguishFire>().enabled = false;
             }
         }
     }

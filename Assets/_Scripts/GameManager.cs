@@ -6,13 +6,22 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public Transform rightAnchor;
+    public GameObject controllers;
+
+    public GameObject Rope;
+    private bool ropeOn;
+    public GameObject pickExtUI;
+
+    public AudioClip callRing;
+    public AudioClip popUI;
+
     public bool canAlert;
     public bool alertPressed;
 
     [HideInInspector]
     public bool clothOn;
 
-    [HideInInspector]
     public string dialedNumber;
 
     public bool pinRemoved;
@@ -42,13 +51,27 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(pinRemoved && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0.8f && extinguisherSize > 0)
+        if(!ropeOn && controllers.active)
         {
-            particles.GetComponent<ParticleSystem>().Play();
-            extinguisherSize -= Time.deltaTime;
+            ropeOn = true;
+            pickExtUI.SetActive(true);
+            Rope.SetActive(true);
+        }
+
+        if (pinRemoved && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0.8f)
+        {
+            OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RHand);
+
+            if (!particles.GetComponent<AudioSource>().isPlaying)
+                particles.GetComponent<AudioSource>().Play();
+            else if(!particles.GetComponent<ParticleSystem>().isPlaying)
+                particles.GetComponent<ParticleSystem>().Play();
         }
         else
         {
+
+            OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RHand);
+            particles.GetComponent<AudioSource>().Stop();
             particles.GetComponent<ParticleSystem>().Stop();
         }
     }

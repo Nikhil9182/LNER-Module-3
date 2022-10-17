@@ -23,6 +23,15 @@ public class SelectExtenguisher : MonoBehaviour
         leftController.SetActive(false);
         rigthController.SetActive(false);
     }
+
+    public void OnExtHover(GameObject go)
+    {
+        go.transform.localScale = new Vector3(1.75f, 1.75f, 1.75f);
+    }
+    public void OnExtUnhover(GameObject go)
+    {
+        go.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+    }
     public void OnCO2Select()
     {
         co2.SetActive(true);
