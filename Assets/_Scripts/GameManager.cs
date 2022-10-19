@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public Transform rightAnchor;
     public GameObject controllers;
 
+    public GameObject rayVisual;
+
     public GameObject Rope;
     private bool ropeOn;
     public GameObject pickExtUI;

@@ -7,7 +7,6 @@ public class ExtinguishFire : MonoBehaviour
 {
     private bool canExt;
     public GameObject Fire;
-
     public GameObject ReportUI;
 
     //Alarm, phone, mask, fire, score, total 
@@ -44,6 +43,8 @@ public class ExtinguishFire : MonoBehaviour
 /*                successfulExt.SetActive(true);
 */
                 Fire.GetComponent<AudioSource>().Stop();
+
+                GameManager.instance.rayVisual.SetActive(true);
 
                 GameManager.instance.fireTime = GameManager.instance.totalTime;
 

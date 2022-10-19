@@ -11,6 +11,7 @@ public class AlertManager : MonoBehaviour
     public GameObject phone;
     public GameObject Keypad;
     public GameObject keypadScreen;
+    //public GameObject dialCorrect;
     public GameObject dialError;
     public GameObject fireLocation;
     public GameObject fireType;
@@ -77,6 +78,7 @@ public class AlertManager : MonoBehaviour
     {
         if(GameManager.instance.dialedNumber == "911")
         {
+            //dialCorrect.SetActive(true);
             StartCoroutine(emergencyCalled());
         }
         else
@@ -105,6 +107,7 @@ public class AlertManager : MonoBehaviour
         this.GetComponent<AudioSource>().Play();
 
         yield return new WaitForSeconds(4);
+        //dialCorrect.SetActive(false);
         Keypad.SetActive(false);
         dialError.SetActive(false);
         fireLocation.SetActive(true);
