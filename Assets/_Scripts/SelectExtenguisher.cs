@@ -6,8 +6,7 @@ public class SelectExtenguisher : MonoBehaviour
 {
     public GameObject co2, water, wet, powder, foam;
     public GameObject ovrCamera;
-    public GameObject passThroughGO;
-
+    public GameObject goBackToModuleUI;
     [Header("Particles")]
     public GameObject co2Part;
     public GameObject waterPart;
@@ -74,15 +73,13 @@ public class SelectExtenguisher : MonoBehaviour
     public void EndHand(GameObject particles)
     {
         GameManager.instance.rayVisual.SetActive(true);
+        goBackToModuleUI.SetActive(true);
 
         GameManager.instance.particles = particles;
         handInteractions.SetActive(false);
         leftController.SetActive(true);
         rigthController.SetActive(true);
         selectExtUI.SetActive(false);
-
-        passThroughGO.transform.position = new Vector3(ovrCamera.transform.position.x, 0.95f, ovrCamera.transform.position.z);
-        passThroughGO.SetActive(true);
     }
 
 }

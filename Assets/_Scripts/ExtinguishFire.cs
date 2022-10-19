@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ExtinguishFire : MonoBehaviour
 {
     private bool canExt;
     public GameObject Fire;
     public GameObject ReportUI;
+    public GameObject wrongExtUI;
 
     //Alarm, phone, mask, fire, score, total 
     public GameObject reportText;
+    public Image bloodImage;
 
+    private float bloodTime;
     public void Update()
     {
         if (canExt && GameManager.instance.pinRemoved && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0.8f)
@@ -25,6 +29,20 @@ public class ExtinguishFire : MonoBehaviour
             {
                 ReduceFire(0.0025f);
                 GameManager.instance.extinguisherSize -= Time.deltaTime;
+            }
+            else
+            {
+                if(bloodTime < GameManager.instance.wrongExtTime)
+                {
+                    var newColor = new Color(1.0f, 0f, 0f, bloodImage.color.a + 0.005f);
+                    bloodImage.color = newColor;
+                }
+                else
+                {
+                    DisplayReport();
+                    wrongExtUI.SetActive(true);
+                }
+                bloodTime += Time.deltaTime;
             }
         }
     }

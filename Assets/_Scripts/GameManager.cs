@@ -33,11 +33,16 @@ public class GameManager : MonoBehaviour
     public int fireSize = 100;
     public float extinguisherSize;
 
+    public float wrongExtTime = 2f;
+
+
     public float totalTime;
     public float alarmTime;
     public float phoneTime;
     public float maskTime;
     public float fireTime;
+
+    private bool doNothing;
 
     private void Awake()
     {
@@ -63,15 +68,16 @@ public class GameManager : MonoBehaviour
         if (pinRemoved && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0.8f)
         {
             OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RHand);
+            doNothing = true;
 
             if (!particles.GetComponent<AudioSource>().isPlaying)
                 particles.GetComponent<AudioSource>().Play();
             else if(!particles.GetComponent<ParticleSystem>().isPlaying)
                 particles.GetComponent<ParticleSystem>().Play();
         }
-        else
+        else if(doNothing)
         {
-
+            doNothing = false;
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RHand);
             particles.GetComponent<AudioSource>().Stop();
             particles.GetComponent<ParticleSystem>().Stop();

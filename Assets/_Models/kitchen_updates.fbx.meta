@@ -3,7 +3,32 @@ guid: 7689cec5724529044ac1bee1c0ab4900
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Carpaint.red
+    second: {fileID: 2100000, guid: 080d3cfd409691246bc644bad9c56a2f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass.Dirty
+    second: {fileID: 2100000, guid: 3baf371955565764eaf07da8f5514e87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 6954ae8999506624896ee89b6f5c1bbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.013
+    second: {fileID: 2100000, guid: ed64ac6be14e34845891c636f88400f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Surface.White
+    second: {fileID: 2100000, guid: c94ee29f99827cb4c80900c14611a5e8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
