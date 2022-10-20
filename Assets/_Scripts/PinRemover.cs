@@ -7,13 +7,12 @@ public class PinRemover : MonoBehaviour
 
     public GameObject grabPin;
     public GameObject sprayExt;
-    public GameObject baseFire;
 
     private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.CompareTag("Pin"))
         {
-            if(OVRInput.Get(OVRInput.Axis1D.SecondaryHandTrigger) > 0.4f)
+            if(OVRInput.Get(OVRInput.Axis1D.SecondaryHandTrigger) > 0.2f)
             {
                 other.gameObject.transform.parent = null;
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;

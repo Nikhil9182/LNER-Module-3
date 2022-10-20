@@ -14,20 +14,24 @@ public class MouthRug : MonoBehaviour
     {
         if(canLerp)
         {
-            this.transform.rotation = Quaternion.Euler(new Vector3(180f, 0f, 0f));
-            this.transform.position = Vector3.SmoothDamp(this.transform.position, new Vector3(mainCamera.position.x, mainCamera.position.y, mainCamera.position.z), ref velocity, lerpTime);
+            this.transform.position = Vector3.SmoothDamp(this.transform.position, new Vector3(mainCamera.position.x, mainCamera.position.y - 0.13f, mainCamera.position.z + 0.06f), ref velocity, lerpTime);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.Euler(new Vector3(180f, 0f, 180f)), lerpTime);
         }
     }
 
     public void OnClothSelect()
     {
-        canLerp = true;
-        StartCoroutine(disableCloth());
+        if(GameManager.instance.inClothPlace)
+        {
+            canLerp = true;
+            StartCoroutine(disableCloth());
+        }
     }
 
     IEnumerator disableCloth()
     {
-        yield return new WaitForSeconds(3f);
-        Destroy(this.gameObject);
+        yield return new WaitForSeconds(2f);
+        this.gameObject.transform.parent = mainCamera;
+        canLerp = false;
     }
 }

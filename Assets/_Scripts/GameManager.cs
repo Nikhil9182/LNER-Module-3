@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public bool alertPressed;
 
     [HideInInspector]
-    public bool clothOn;
+    public bool inClothPlace;
 
     public string dialedNumber;
 

@@ -76,7 +76,7 @@ public class AlertManager : MonoBehaviour
 
     public void OnCallDialed()
     {
-        if(GameManager.instance.dialedNumber == "911")
+        if(GameManager.instance.dialedNumber == "999")
         {
             //dialCorrect.SetActive(true);
             StartCoroutine(emergencyCalled());
@@ -131,6 +131,10 @@ public class AlertManager : MonoBehaviour
         fireType.SetActive(false);
     }
 
+    public void OnClothTpSelect()
+    {
+        GameManager.instance.inClothPlace = true;
+    }
     public void OnFightSelect()
     {
         selectExtUI.SetActive(true);

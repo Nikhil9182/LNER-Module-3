@@ -19,6 +19,9 @@ public class SelectExtenguisher : MonoBehaviour
 
     public GameObject leftController, rigthController;
 
+    public GameObject mask;
+
+
     private void Awake()
     {
         leftController.SetActive(false);
@@ -80,6 +83,7 @@ public class SelectExtenguisher : MonoBehaviour
         leftController.SetActive(true);
         rigthController.SetActive(true);
         selectExtUI.SetActive(false);
+        mask.SetActive(false);
     }
 
 }

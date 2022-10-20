@@ -115,8 +115,6 @@ public class UiManager : MonoBehaviour
         selectCloth.SetActive(false);
         GetBackToFire.SetActive(true);
 
-        GameManager.instance.clothOn = true;
-
         GameManager.instance.maskTime = GameManager.instance.totalTime;
 
         StartCoroutine(hideUI(GetBackToFire));
@@ -124,7 +122,7 @@ public class UiManager : MonoBehaviour
 
     public void OnFireLocation()
     {
-        if(GameManager.instance.clothOn == true)
+        if(GameManager.instance.inClothPlace == true)
             Precautions.SetActive(true);
     }
     IEnumerator hideUI(GameObject UI)
