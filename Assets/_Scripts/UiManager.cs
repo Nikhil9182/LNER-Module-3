@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour
 {
@@ -134,10 +135,19 @@ public class UiManager : MonoBehaviour
 
     public void DisplayReport(GameObject reportText)
     {
+        
+        reportText.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "0" + ((int)GameManager.instance.alarmTime / 60).ToString() + ":" + ((int)GameManager.instance.alarmTime % 60).ToString();
+        reportText.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "0" + ((int)GameManager.instance.phoneTime / 60).ToString() + ":" + ((int)GameManager.instance.phoneTime % 60).ToString();
+        reportText.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "0" + ((int)GameManager.instance.maskTime / 60).ToString() + ":" + ((int)GameManager.instance.maskTime % 60).ToString();
+        reportText.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "0" + ((int)GameManager.instance.totalTime / 60).ToString() + ":" + ((int)GameManager.instance.totalTime % 60).ToString(); //for evac
+    }
 
-        reportText.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "00:" + ((int)GameManager.instance.alarmTime).ToString();
-        reportText.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "00:" + ((int)GameManager.instance.phoneTime).ToString();
-        reportText.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "00:" + ((int)GameManager.instance.maskTime).ToString();
-        reportText.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "00:" + ((int)GameManager.instance.fireTime).ToString();
+    public void OnResetClick()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void OnExitClick()
+    {
+        Application.Quit();
     }
 }

@@ -141,4 +141,9 @@ public class AlertManager : MonoBehaviour
         GameManager.instance.totalTime = 0;
     }
 
+    public void OnEvacSelect()
+    {
+        GameManager.instance.totalTime = 0;
+    }
+
 }

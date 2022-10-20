@@ -30,8 +30,7 @@ public class MouthRug : MonoBehaviour
 
     IEnumerator disableCloth()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         this.gameObject.transform.parent = mainCamera;
-        canLerp = false;
     }
 }

@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     public float phoneTime;
     public float maskTime;
     public float fireTime;
+    public float evacTime;
 
     private bool doNothing;
 
