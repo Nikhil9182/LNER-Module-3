@@ -73,15 +73,13 @@ public class ExtinguishFire : MonoBehaviour
         }
     }
 
-    void DisplayReport()
+    public void DisplayReport()
     {
-
+        
         reportText.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "00:" + ((int)GameManager.instance.alarmTime).ToString();
         reportText.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "00:" + ((int)GameManager.instance.phoneTime).ToString();
         reportText.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "00:" + ((int)GameManager.instance.maskTime).ToString();
         reportText.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "00:" + ((int)GameManager.instance.fireTime).ToString();
-
-        
     }
     public void ExtenguishingFire()
     {

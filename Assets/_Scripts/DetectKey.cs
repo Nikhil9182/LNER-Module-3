@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class DetectKey : MonoBehaviour
 {
-    public Transform keyFinalTransform;
+    public GameObject doorHandler;
+    public GameObject useKeyUI;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Key"))
+        if(other.gameObject.CompareTag("Key") && !GameManager.instance.keyGrabbed)
         {
-            other.gameObject.transform.position = keyFinalTransform.position;
-            other.gameObject.transform.rotation = keyFinalTransform.rotation;
+            other.gameObject.transform.position = this.transform.position;
+            other.gameObject.transform.rotation = this.transform.rotation;
+            doorHandler.SetActive(true);
+            other.transform.parent = this.transform.parent;
+            useKeyUI.SetActive(false);
         }
     }
+
 }

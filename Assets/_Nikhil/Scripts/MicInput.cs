@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MicInput : MonoBehaviour
 {
+    public GameObject shoutUI;
+    public GameObject breakGlass;
     [SerializeField]
     private float minLoudness = 0;
     [SerializeField]
@@ -79,6 +81,8 @@ public class MicInput : MonoBehaviour
                     foreach (var npc in npcCharacters)
                     {
                         npc.Shouted();
+                        shoutUI.SetActive(false);
+                        breakGlass.SetActive(true);
                     }
                 }
             }

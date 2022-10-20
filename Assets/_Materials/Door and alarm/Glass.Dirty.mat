@@ -8,12 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Glass.Dirty
-  m_Shader: {fileID: 4800000, guid: 63a90426d42b698448966291201d6716, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2914c939860ab3b40b0972bf8aedb87f, type: 3}
   m_ValidKeywords:
   - _DETAILSOURCE_SPECULARALPHA
   - _SOURCE_SPECULARALPHA
   - _TRIPLANARSPACEPROJECTION_OBJECTSPACE
   m_InvalidKeywords:
+  - _ALPHAPREMULTIPLY_ON
   - _ENABLETRIPLANARPROJECTION_ON
   - _USEAOFROMMAINPROPERTIES_ON
   - _USEEMISSIONFROMMAINPROPERTIES_ON
@@ -70,6 +71,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TransparentMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -82,6 +87,7 @@ Material:
     - _Brightness: 1
     - _BumpScale: 1
     - _ContrastDetailMap: 0
+    - _ContrastTransparentMap: 0
     - _Cull: 0
     - _Cutoff: 0.5
     - _DetailBrightness: 1
@@ -90,7 +96,7 @@ Material:
     - _DetailSaturation: 0
     - _DetailSource: 0
     - _DetailSpecularIntensity: 0.2
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _EmissionIntensity: 1
     - _EnableDetailMask: 0
     - _EnableTriplanarProjection: 1
@@ -98,10 +104,12 @@ Material:
     - _Glossiness: 0.59999996
     - _GlossyReflections: 1
     - _IntensityMask: 1
+    - _IntensityTransparentMap: 0.659
     - _InvertABaseColor: 0
     - _InvertMask: 0
+    - _InvertTransparent: 0
     - _Metallic: 0
-    - _Mode: 0
+    - _Mode: 3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Saturation: 0
@@ -110,18 +118,20 @@ Material:
     - _SpecularHighlights: 1
     - _SpecularIntensity: 0.2
     - _SpreadDetailMap: 0
+    - _SpreadTransparentMap: 0
     - _SrcBlend: 1
     - _TriplanarFalloff: 20
     - _TriplanarSpaceProjection: 0
     - _UVSec: 0
     - _UseAoFromMainProperties: 1
+    - _UseBaseColorAlpha: 0
     - _UseEmissionFromMainProperties: 1
     - _VisualizeMask: 0
     - _ZTest: 4
-    - _ZWrite: 1
+    - _ZWrite: 0
     - __dirty: 1
     m_Colors:
-    - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 0.13333334}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 0}
     - _DetailSpecularColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

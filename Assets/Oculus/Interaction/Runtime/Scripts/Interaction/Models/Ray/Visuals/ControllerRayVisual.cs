@@ -157,11 +157,11 @@ namespace Oculus.Interaction
 
         private void UpdateVisual()
         {
-            if (_rayInteractor.State == InteractorState.Disabled)
+            /*if (_rayInteractor.State == InteractorState.Disabled)
             {
                 _renderer.enabled = false;
                 return;
-            }
+            }*/
 
             _renderer.enabled = true;
             transform.SetPositionAndRotation(_rayInteractor.Origin, _rayInteractor.Rotation);

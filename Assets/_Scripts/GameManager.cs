@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     public float wrongExtTime = 2f;
 
+    public bool keyGrabbed;
+
 
     public float totalTime;
     public float alarmTime;
@@ -82,5 +84,14 @@ public class GameManager : MonoBehaviour
             particles.GetComponent<AudioSource>().Stop();
             particles.GetComponent<ParticleSystem>().Stop();
         }
+    }
+
+    public void OnKeyGrabbed()
+    {
+        keyGrabbed = true;
+    }
+    public void OnKeyReleased()
+    {
+        keyGrabbed = false;
     }
 }
